@@ -1,10 +1,19 @@
 import requests
 import time
+from dotenv import load_dotenv
+import os
 
-def check_virustotal(url, api_key):
+# Load environment variables from .env file
+load_dotenv()
+
+# Get API keys from environment variables
+VT_API_KEY = os.getenv('vt_api_key')
+URLSCAN_API_KEY = os.getenv('urlscan_api_key')
+
+def check_virustotal(url):
     print("Checking with VirusTotal...")
     api_url = "https://www.virustotal.com/vtapi/v2/url/report"
-    params = {"apikey": api_key, "resource": url}
+    params = {"apikey": VT_API_KEY, "resource": url}
     
     try:
         response = requests.get(api_url, params=params)
@@ -19,10 +28,10 @@ def check_virustotal(url, api_key):
     except requests.RequestException as e:
         return f"VirusTotal: An error occurred: {str(e)}"
 
-def check_urlscan(url, api_key):
+def check_urlscan(url):
     print("Checking with urlscan.io...")
     api_url = "https://urlscan.io/api/v1/scan/"
-    headers = {"API-Key": api_key}
+    headers = {"API-Key": URLSCAN_API_KEY}
     data = {"url": url}
     
     try:
@@ -49,29 +58,6 @@ def check_urlscan(url, api_key):
     except requests.RequestException as e:
         return f"urlscan.io: An error occurred: {str(e)}"
 
-def check_cisco_talos(url):
-    print("Checking with Cisco Talos...")
-    api_url = f"https://talosintelligence.com/cloud_intel/url_lookup"
-    params = {"url": url}
-    
-    try:
-        response = requests.get(api_url, params=params)
-        result = response.json()
-        
-        if "category" in result:
-            category = result["category"]
-            return f"Cisco Talos: URL category - {category}"
-        else:
-            return "Cisco Talos: Unable to determine URL category."
-    except requests.RequestException as e:
-        return f"Cisco Talos: An error occurred: {str(e)}"
-
-def display_menu():
-    print("\nURL Checker Menu:")
-    print("1. Check with VirusTotal")
-    print("2. Check with urlscan.io")
-    print("3. Check with Cisco Talos")
-    print("4. Exit")
 
 def main():
     url = input("Enter the URL you want to check: ")
@@ -81,11 +67,9 @@ def main():
         choice = input("Enter your choice (1-4): ")
 
         if choice == '1':
-            api_key = input("Enter your VirusTotal API key: ")
-            result = check_virustotal(url, api_key)
+            result = check_virustotal(url)
         elif choice == '2':
-            api_key = input("Enter your urlscan.io API key: ")
-            result = check_urlscan(url, api_key)
+            result = check_urlscan(url)
         elif choice == '3':
             result = check_cisco_talos(url)
         elif choice == '4':
