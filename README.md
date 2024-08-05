@@ -11,7 +11,6 @@ You need to have api keys for virustotal, urlscan.io, and Cisco Talos for this t
 ### Storing your API keys
 
 To securely store api keys, I have provided a .env template file in this repository. You should name each key as follows and insert your keys after them:
-    `vt_api_key
-    `urlscan_api_key
+    `vt_api_key` and `urlscan_api_key`
 
 ### Using the urlscan Tool
