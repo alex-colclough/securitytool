@@ -58,6 +58,12 @@ def check_urlscan(url):
     except requests.RequestException as e:
         return f"urlscan.io: An error occurred: {str(e)}"
 
+def display_menu():
+    print("\nMenu:")
+    print("1. Check with VirusTotal")
+    print("2. Check with urlscan.io")
+    print("3. Check with Cisco Talos")
+    print("4. Exit")
 
 def main():
     url = input("Enter the URL you want to check: ")
