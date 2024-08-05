@@ -15,14 +15,3 @@ To securely store api keys, I have provided a .env template file in this reposit
     'urlscan_api_key'
 
 ### Using the URL scanner functionality
-
-<Add stuff here in the future>
-
-
-<### Using the Defender ATP query>
-
-
-
-
-
-<### Querying for Tenable agents>
