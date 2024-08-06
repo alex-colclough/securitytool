@@ -4,7 +4,7 @@ This python script allows you to check urlscan.io, virustotal, and cisco talos f
 
 # Assumptions
 
-You need to have api keys for virustotal, urlscan.io, and Cisco Talos for this to work properly. 
+You need to have api keys for `virustotal`, `urlscan.io`, and `Cisco Talos` for this to work properly. 
 
 # Usage
 
